@@ -86,7 +86,7 @@ int main() {
 
 	int action = 0;
 	int numbers = 0;
-	int a, b, c;
+	double a, b, c;
 
 	while (true)
 	{
@@ -145,9 +145,11 @@ int main() {
 		else if (action == 2) {
 
 			if (numbers == 3) {
-				cout << a << " / " << b << " / " << c << " = " << devide(a, b, c) << endl;
+
+				cout << a << " / " << b << " / " << c << " = " << devide(a, b, c) << endl;	
 			}
 			else {
+				
 				cout << a << " / " << b << " = " << devide(a, b) << endl;
 			}
 		}
