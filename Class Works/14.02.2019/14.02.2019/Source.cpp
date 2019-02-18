@@ -85,7 +85,8 @@ int main() {
 
 /*
 2. Банкомат.Реалізувати перевантажені функції там, де це необхідно.
--   Є реєстрація користувача(логін по номеру карти(масив  int),пароль(масив int), або логін по номеру телефону(масив int)).
+-   Є реєстрація користувача(логін по номеру карти(масив  int),пароль(масив int),
+або логін по номеру телефону(масив int)).
 -   Вхід в аккаунт через логін і пароль або через логін і номер телефону(масив int).
 -	Переказ грошей або на картку або на телефон.
 -	Вивід грошей або ціле число(передати int) або дробове число(передати double). Перевірити баланс(на екра).
@@ -108,23 +109,6 @@ void output(T count, int card[]) {
 	cout << "Your balance - " << card[2] << " UAH" << endl << endl;
 
 }
-
-//Переказ грошей
-template <class T>
-void transfer(T count, int card[], int transfer) {
-
-	if (card[2] >= count) {
-		card[2] -= count;
-		cout << "-" << count << " UAH" << endl;
-	}
-	else {
-		cout << "Not money..." << endl;
-	}
-
-	cout << "Your balance - " << card[2] << " UAH" << endl << endl;
-
-}
-
 
 int main() {
 
@@ -174,16 +158,24 @@ int main() {
 							number_card = i;
 							count = 0;
 							auth = true;
+							i = ROW;
 						}
 						else {
 							count--;
 						}
 					}
 				}
+				else {
+					cout << "Not found card!" << endl;
+					i = ROW;
+				}
 			}
 		}
 
 		if (auth) {
+
+			int transfer = 0;
+			int tcard = 0;
 
 			cout << "1 - money transfer to card" << endl;
 			cout << "2 - output money" << endl;
@@ -199,10 +191,35 @@ int main() {
 				//Переказ грошей
 			case 1:
 
+				cout << "Please enter card:" << endl;
+				cin >> tcard;
 
+				for (int i = 0; i < ROW; i++) {
+					if (card[i][0] == tcard) {
+						cout << "Card Found..." << endl;
+						tcard = i;
+						i = ROW;
+					}
+					else {
+						cout << "Not fount card!" << endl;
+						i = ROW;
+					}
+				}
 
+				cout << "Please enter transfer money:" << endl;
+				cin >> transfer;
 
+				if (card[number_card][2] < transfer) {
+					cout << "Not money..." << endl;
+					
+				}
+				else {
+					card[number_card][2] -= transfer;
+					card[tcard][2] += transfer;
+					cout << "SUCCESS!" << endl;
+				}
 
+				cout << "Your balance - " << card[number_card][2] << " UAH" << endl << endl;
 				break;
 
 				//Вивід грошей
